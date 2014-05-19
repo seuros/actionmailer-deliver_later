@@ -3,21 +3,24 @@ lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'actionmailer/deliver_later/version'
 
-Gem::Specification.new do |spec|
-  spec.name          = "actionmailer-deliver_later"
-  spec.version       = Actionmailer::DeliverLater::VERSION
-  spec.authors       = ["Abdelkader Boudih"]
-  spec.email         = ["terminale@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
-  spec.license       = "MIT"
+Gem::Specification.new do |s|
+  s.platform    = Gem::Platform::RUBY
+  s.name        = 'actionmailer-deliver_later'
+  s.version     = '4.2.0.alpha'
+  s.summary     = ''
+  s.description = ''
 
-  spec.files         = `git ls-files -z`.split("\x0")
-  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
-  spec.require_paths = ["lib"]
+  s.required_ruby_version = '>= 1.9.3'
 
-  spec.add_development_dependency "bundler", "~> 1.6"
-  spec.add_development_dependency "rake"
+  s.license = 'MIT'
+
+  s.author   = ['David Heinemeier Hansson','Abdelkader Boudih']
+  s.email    = ['david@loudthinking.com','terminale@gmail.com']
+  s.homepage = 'http://www.rubyonrails.org'
+
+  s.files        = Dir['MIT-LICENSE', 'README.rdoc', 'lib/**/*']
+  s.require_path = 'lib'
+
+  s.add_dependency 'actionmailer'
+  s.add_dependency 'activejob'
 end
