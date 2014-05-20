@@ -1,1 +1,1 @@
-require '../action_mailer/deliver_later'
+require_relative '../action_mailer/deliver_later'
