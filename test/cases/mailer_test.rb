@@ -7,5 +7,4 @@ class MailerTest < ActiveSupport::TestCase
   test 'should respond to .deliver_async' do
     assert_respond_to(DelayedMailer, :deliver_async)
   end
-
 end

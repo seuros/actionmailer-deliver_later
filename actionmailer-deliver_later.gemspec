@@ -14,8 +14,8 @@ Gem::Specification.new do |s|
 
   s.license = 'MIT'
 
-  s.author   = ['David Heinemeier Hansson','Abdelkader Boudih']
-  s.email    = ['david@loudthinking.com','terminale@gmail.com']
+  s.author   = ['David Heinemeier Hansson', 'Abdelkader Boudih']
+  s.email    = ['david@loudthinking.com', 'terminale@gmail.com']
   s.homepage = 'http://www.rubyonrails.org'
 
   s.files        = Dir['MIT-LICENSE', 'README.rdoc', 'lib/**/*']

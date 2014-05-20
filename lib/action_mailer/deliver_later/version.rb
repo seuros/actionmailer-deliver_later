@@ -1,5 +1,9 @@
+require_relative 'gem_version'
+
 module Actionmailer
   module DeliverLater
-    VERSION = '0.0.1'
+    def self.version
+      gem_version
+    end
   end
 end
