@@ -6,6 +6,10 @@ module ActionMailer
       def perform(mailer, delivery, *parameters)
         mailer.constantize.send(delivery, *parameters).deliver
       end
+
+      def logger
+        ActionMailer::Base.logger
+      end
     end
   end
 end
