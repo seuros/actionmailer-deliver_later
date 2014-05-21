@@ -7,7 +7,6 @@ module ActionMailer
     extend ActiveSupport::Autoload
     autoload :Job
     autoload :Mixin
+    autoload :MailMessageWrapper
   end
 end
-
-ActionMailer::Base.extend(ActionMailer::DeliverLater::Mixin)

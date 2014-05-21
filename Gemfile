@@ -4,3 +4,4 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'activejob', github: 'rails/activejob'
+

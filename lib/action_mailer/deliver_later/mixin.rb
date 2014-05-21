@@ -1,11 +1,19 @@
+require 'active_support/concern'
+
 module ActionMailer
   module DeliverLater
     module Mixin
-      def deliver_later(delivery, *parameters)
-        ActionMailer::DeliverLater::Job.enqueue self.class, delivery, *parameters
-      end
+      extend ActiveSupport::Concern
 
-      alias_method :deliver_async, :deliver_later
+      module ClassMethods
+        def method_missing(method_name, *args)
+          if action_methods.include?(method_name.to_s)
+            MailMessageWrapper.new(self, method_name, *args)
+          else
+            super
+          end
+        end
+      end
     end
   end
 end
