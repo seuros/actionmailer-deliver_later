@@ -6,3 +6,4 @@ require 'action_mailer/deliver_later'
 require_relative 'mailers/delayed_mailer'
 
 require 'active_support/testing/autorun'
+require "minitest/autorun"

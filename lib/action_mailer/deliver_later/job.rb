@@ -3,8 +3,8 @@ module ActionMailer
     class Job < ActiveJob::Base
       queue_as :mailers
 
-      def perform(mailer, delivery, *parameters)
-        mailer.constantize.send(delivery, *parameters).deliver
+      def perform(mailer, mail_method, delivery_method, *args)
+        mailer.constantize.send(mail_method, *args).send(delivery_method)
       end
 
       def logger
