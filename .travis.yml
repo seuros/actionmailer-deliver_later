@@ -1,0 +1,19 @@
+before_install:
+- travis_retry gem install bundler
+rvm:
+- 1.9.3
+- 2.0.0
+- 2.1
+- ruby-head
+- rbx-2
+- rbx-head
+- jruby
+- jruby-head
+matrix:
+  allow_failures:
+  - rvm: rbx-2
+  - rvm: rbx-head
+  - rvm: jruby
+  - rvm: jruby-head
+  - rvm: ruby-head
+  fast_finish: true
