@@ -5,7 +5,6 @@ $LOAD_PATH << File.dirname(__FILE__) + '/../lib'
 require 'action_mailer/deliver_later'
 require_relative 'mailers/delayed_mailer'
 
-require "activejob"
 ActiveJob::Base.queue_adapter = :inline
 ActiveJob::Base.logger = Logger.new("/dev/null")
 
