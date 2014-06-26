@@ -3,7 +3,10 @@ require 'minitest/mock'
 
 class MailerTest < ActiveSupport::TestCase
 
-  setup { @mail = DelayedMailer.test_message(1,2,3) }
+  setup do
+    @mail = DelayedMailer.test_message(1,2,3)
+    ActionMailer::Base.deliveries.clear
+  end
 
   test 'should be a MailMessageWrapper' do
     assert_equal @mail.class, ActionMailer::DeliverLater::MailMessageWrapper
@@ -29,25 +32,30 @@ class MailerTest < ActiveSupport::TestCase
     assert_respond_to @mail, :deliver_later!
   end
 
+  test 'should enqueue and run correctly in activejob' do
+    @mail.deliver_later!
+    assert_equal ActionMailer::Base.deliveries.size, 1
+  end
+
   test 'should enqueue the email with :deliver delivery method' do
     ret = ActionMailer::DeliverLater::Job.stub :enqueue, ->(*args){ args } do
       @mail.deliver_later
     end
-    assert_equal ret, [DelayedMailer, :test_message, :deliver, 1, 2, 3]
+    assert_equal ret, ["DelayedMailer", "test_message", "deliver", 1, 2, 3]
   end
 
   test 'should enqueue the email with :deliver! delivery method' do
     ret = ActionMailer::DeliverLater::Job.stub :enqueue, ->(*args){ args } do
       @mail.deliver_later!
     end
-    assert_equal ret, [DelayedMailer, :test_message, :deliver!, 1, 2, 3]
+    assert_equal ret, ["DelayedMailer", "test_message", "deliver!", 1, 2, 3]
   end
 
   test 'should enqueue a delivery with a delay' do
     ret = ActionMailer::DeliverLater::Job.stub :enqueue_in, ->(*args){ args } do
       @mail.deliver_later in: 600
     end
-    assert_equal ret, [600, DelayedMailer, :test_message, :deliver, 1, 2, 3]
+    assert_equal ret, [600, "DelayedMailer", "test_message", "deliver", 1, 2, 3]
   end
 
   test 'should enqueue a delivery at a specific time' do
@@ -55,7 +63,7 @@ class MailerTest < ActiveSupport::TestCase
     ret = ActionMailer::DeliverLater::Job.stub :enqueue_at, ->(*args){ args } do
       @mail.deliver_later at: later_time
     end
-    assert_equal ret, [later_time, DelayedMailer, :test_message, :deliver, 1, 2, 3]
+    assert_equal ret, [later_time, "DelayedMailer", "test_message", "deliver", 1, 2, 3]
   end
 
 end
