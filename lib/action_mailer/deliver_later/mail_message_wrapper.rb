@@ -25,7 +25,7 @@ module ActionMailer
 
       private
       def enqueue_delivery(delivery_method, options={})
-        args = @mailer, @mail_method, delivery_method, *@args
+        args = @mailer.name, @mail_method.to_s, delivery_method.to_s, *@args
         enqueue_method = :enqueue
         if options[:at]
           enqueue_method = :enqueue_at
