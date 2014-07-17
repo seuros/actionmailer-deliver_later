@@ -1,6 +1,6 @@
 require 'active_job'
 require 'action_mailer'
-require 'action_mailer/deliver_later/version'
+require_relative 'deliver_later/version'
 
 module ActionMailer
   module DeliverLater
@@ -10,3 +10,5 @@ module ActionMailer
     autoload :MailMessageWrapper
   end
 end
+
+require_relative 'deliver_later/railtie' if defined?(::Rails)

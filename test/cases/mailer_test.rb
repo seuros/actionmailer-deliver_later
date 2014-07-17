@@ -8,6 +8,10 @@ class MailerTest < ActiveSupport::TestCase
     ActionMailer::Base.deliveries.clear
   end
 
+  test 'DelayedMailer should include mixin' do
+    assert_includes DelayedMailer.ancestors, ActionMailer::DeliverLater::Mixin
+  end
+
   test 'should be a MailMessageWrapper' do
     assert_equal @mail.class, ActionMailer::DeliverLater::MailMessageWrapper
   end
