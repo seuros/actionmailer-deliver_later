@@ -6,7 +6,7 @@ module Actionmailer
     class Railtie < Rails::Railtie # :nodoc:
       initializer 'actionmailer-deliver_later' do
         ActiveSupport.on_load(:action_mailer) do
-          include ActionMailer::DeliverLater::Mixin
+          prepend ActionMailer::DeliverLater::Mixin
         end
       end
     end
